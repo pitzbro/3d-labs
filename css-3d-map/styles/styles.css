@@ -1,0 +1,228 @@
+@keyframes cube {
+  to {
+    transform: matrix3d(-0.600017, 0.163676, 0.321232, 0, -0.360527, -0.272402, -0.534619, 0, 5.55112e-17, -0.891007, 0.45399, 0, 129.15, -129.15, 229, 1);
+  }
+}
+
+:root {
+  --rZ: 5deg;
+  --rX: 35deg;
+  --rY: 1deg;
+  --tY: -7%;
+  --tX: 10%;
+  --tZ: -61px;
+  --sC: 0.8;
+}
+
+@font-face {
+  font-family: "Open Sans Hebrew";
+  src: url("fonts/OpenSansHebrewRegular.woff");
+}
+
+body {
+  min-height: 500vh;
+  background-color: #b8b8b8;
+  font-family: "Open Sans Hebrew", "Helvetica Neue", tahoma, Helvetica, Arial,
+    sans-serif;
+  color: #2d2d2d;
+
+  transition: background-color 2s;
+}
+
+body.military {
+  background-color: #cbcfbd;
+  /* font-family: 'Courier New', Courier, monospace; */
+}
+
+body.military #territories {
+  fill: #444;
+}
+
+body.military .gaza-teritory {
+  fill: rgb(68 68 68 / 42%);
+}
+
+.military-img {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+
+body.military .military-img {
+  opacity: 1;
+}
+
+g#roads {
+  transition: opacity 2s;
+}
+
+body.military g#roads {
+  opacity: 0;
+}
+
+g#roads path {
+  stroke: #636363;
+}
+
+body>section {
+  position: relative;
+  background-color: #fff;
+  max-width: 710px;
+  padding: 20px;
+  margin: 100vh 40px 20px auto;
+  border: 1px solid #000;
+  line-height: 1.7;
+  display: inline-block;
+  opacity: 0;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.clock {
+  z-index: 11;
+  top: 0;
+  right: 0;
+  position: fixed;
+  font-family: monospace;
+  font-size: 28px;
+  background-color: #fff;
+  margin: 20px;
+  padding: 6px 14px;
+  font-weight: bold;
+  border: 1px solid #000;
+  /* opacity: 0; */
+}
+
+.cube-wrap {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  perspective: 800px;
+  display: grid;
+  place-items: center;
+  place-content: center;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  width: 300vmin;
+  height: 300vmin;
+  transform-style: preserve-3d;
+  transform: translateX(var(--tX)) translateY(var(--tY)) translateZ(var(--tZ)) rotateX(var(--rX)) rotateY(var(--rY)) rotateZ(var(--rZ)) scale(var(--sC));
+  animation: cube 1s linear;
+}
+
+
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: visible;
+}
+
+.side img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* transform: translateX(-50%); */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* transform: rotate(-10.7deg) scale(0.63) translate(-81.9%, -4.7%); */
+  /* opacity: 0.25; */
+}
+
+.side svg {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+:root * {
+  animation-play-state: paused;
+  animation-delay: calc(var(--scroll) * -1s);
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+
+/* ASSETS */
+
+.asset {
+  position: fixed;
+  transform: translate(-50%, calc(-100% - 14px));
+  width: clamp(150px, 50vw, 240px);
+  text-align: center;
+  font-size: 14px;
+  opacity: 0;
+
+  transition: opacity .8s;
+}
+
+.asset.active {
+  opacity: 1;
+}
+
+.asset>div {
+  position: relative;
+  background-color: #fff;
+  padding: 0 0 10px;
+  box-shadow: 0px 1px 6px 0px rgb(0 0 0 / 50%);
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.asset>div::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, calc(100% - 1px));
+  content: "";
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 14px 10px 0 10px;
+  border-color: #fff transparent transparent transparent;
+}
+
+.asset>div>span {
+  padding: 10px 10px 6px;
+  display: block;
+}
+
+.asset>span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.asset video {
+  width: 100%;
+  /* aspect-ratio: 1 / 1; */
+  object-fit: cover;
+}
+
+.asset img {
+  width: 100%;
+  /* aspect-ratio: 1 / 1; */
+  object-fit: cover;
+}
+
+#labels {
+  opacity: 0;
+}
+
+#dots circle:not([data-circle]) {
+  opacity: 0;
+}
+
+#dots use {
+  opacity: 0;
+  transition: 0.8s;
+}
+
+#dots use.active {
+  opacity: 1;
+}

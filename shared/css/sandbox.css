@@ -1,0 +1,218 @@
+/* shared/css/sandbox.css */
+
+/* Design tokens */
+:root {
+    --color-bg: #000000;
+    --color-bg-overlay: rgba(0, 0, 0, 0.56);
+    --color-border: #505050;
+    --color-border-soft: rgba(74, 74, 74, 0.24);
+    --color-text: #999999;
+    --color-heading: #ffffff;
+    --color-accent: #ec8a2e;
+
+    --font-body: georgia, "Times New Roman", serif;
+
+    --sidebar-width: 350px;
+    --sidebar-padding: 15px;
+    --sidebar-radius: 10px;
+
+    --toggle-width: 30px;
+    --toggle-height: 40px;
+}
+
+/* Base layout */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1em;
+    line-height: 1;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* App layout wrapper */
+
+.layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main viewport */
+
+.viewport {
+    width: 100%;
+    height: 100%;
+}
+
+.viewport__canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Typography */
+
+h2 {
+    margin: 0 0 0.75em;
+    font-size: 1em;
+    color: var(--color-heading);
+}
+
+label span {
+    margin-bottom: 0.15em;
+    width: 100%;
+}
+
+/* Inputs */
+
+input {
+    accent-color: var(--color-accent);
+    justify-self: end;
+}
+
+input[type="range"] {
+    cursor: pointer;
+    justify-self: stretch;
+}
+
+/* Sidebar toggle button */
+
+.toggle-sidebar-btn {
+    position: absolute;
+    top: 50px;
+    right: calc(-1 * var(--toggle-width));
+    width: var(--toggle-width);
+    height: var(--toggle-height);
+    padding-inline-end: 12px;
+
+    border-radius: 0 50% 50% 0;
+    border: 1px solid var(--color-border);
+    border-inline-start-color: var(--color-bg);
+    background-color: var(--color-bg);
+    color: var(--color-heading);
+
+    cursor: pointer;
+}
+
+.toggle-sidebar-btn::before {
+    content: '>';
+}
+
+/* When sidebar is open, show "X" (keeps original behaviour) */
+
+.sidebar.open .toggle-sidebar-btn::before {
+    content: 'X';
+}
+
+/* Remove focus outline on click but keep accessibility for keyboard if needed */
+.toggle-sidebar-btn:focus {
+    outline: none;
+}
+
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    z-index: 900;
+    top: 0;
+    left: 0;
+    color: var(--font-body);
+
+    width: var(--sidebar-width);
+    height: 100%;
+    padding: var(--sidebar-padding);
+
+    background: var(--color-bg-overlay);
+    backdrop-filter: blur(1px);
+    border-inline-end: 1px solid var(--color-border);
+
+    text-align: left;
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* Scrollable content area inside sidebar */
+
+.scroll-el {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+
+    /* Scrollbar styling (as in original) */
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background-color: rgba(153, 153, 153, 0.7);
+    }
+}
+
+/* Sections in sidebar */
+
+.sidebar section {
+    margin-bottom: 15px;
+    padding: 1px 15px 10px;
+    border-radius: var(--sidebar-radius);
+    background: var(--color-border-soft);
+    border-bottom: 1px solid #3b3b3b;
+}
+
+/* Label + input rows */
+
+.sidebar section>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sidebar label {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+
+/* Camera tilt/pan stacked controls */
+
+.camera-axes {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Code block */
+
+pre {
+    margin: 0;
+    padding-bottom: 30px;
+    overflow-x: auto;
+}
