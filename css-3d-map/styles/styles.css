@@ -67,6 +67,10 @@ body>section {
   opacity: 0;
 }
 
+.sidebar {
+  --sidebar-width: 270px;
+}
+
 p {
   margin: 0 0 1em;
 }
@@ -149,6 +153,13 @@ p {
   text-align: center;
   font-size: 14px;
   opacity: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* older Edge */
+  pointer-events: none;
 
   color: #223c4c;
 

@@ -53,6 +53,9 @@ function moveAssets() {
 
     // animateTer(prec);
   });
+
+  updateCodePreview()
+
 }
 
 // observer
@@ -219,7 +222,7 @@ window.updateTypography = function (coords) {
     if (labelSpan) {
       labelSpan.textContent = formatted;
     }
-
+    // Update the code preview with the current cube transform
     moveAssets();
   }
 
@@ -249,4 +252,19 @@ window.updateTypography = function (coords) {
     input.value = value;
     applyControl(input);
   };
+  window.onresize = () => moveAssets();
 })();
+
+// Code 
+function updateCodePreview() {
+  const codeEl = document.querySelector(".map-code");
+  const cube = document.querySelector(".cube");
+  
+  console.log('updating code!!!!!!!')
+  if (!cube || !codeEl) return;
+
+  const style = getComputedStyle(cube);
+  const transform = style.transform || "none";
+
+  codeEl.textContent = `${transform};`;
+}

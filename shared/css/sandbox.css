@@ -235,6 +235,10 @@ input[type="range"] {
 
 /* Code block */
 
+code {
+    white-space: normal;
+}
+
 pre {
     margin: 0;
     padding-bottom: 30px;
