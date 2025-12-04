@@ -14,7 +14,7 @@ var fogColor = '0x000000';
 
 //camera
 var cameraHeight = 3000;
-var cameraTilt = 0;
+var cameraTilt = 500;
 var cameraPan = -2500;
 
 //lights
@@ -44,23 +44,38 @@ function resetTypography() {
 }
 
 function updateTypography(cords) {
+  const { x, y } = cords;
 
-    const { x, y } = cords
+  // Same mapping as before
+  const cHeight = 3000 * (1 - y);
+  const cTilt = 3000 * x;
+  const cPan = -3000 * (1 - x);
 
-    // const cameraHeightMin = 0;
-    // const cameraHeightMax = 3000;
+  // Keep globals in sync (so sliders / other code can rely on them)
+  cameraHeight = cHeight;
+  cameraTilt = cTilt;
+  cameraPan = cPan;
 
-    const cHeight = 3000 * (1 - y);
-    const cTilt = 3000 * x;
-    const cPan = -3000 * (1 - x);
-    camera.position.set(cPan, cHeight, cTilt);
-    // const tHeight = 3000 * y;
-    // uniformsTerrain['uDisplacementScale'].value = tHeight;
+  // Apply to camera
+  camera.position.set(cPan, cHeight, cTilt);
 
+  // ---- Sync sidebar sliders with current camera values ---- //
 
+  const heightInput = document.querySelector('input[name="cameraHeightRange"]');
+  if (heightInput) {
+    heightInput.value = Math.round(cHeight);
+  }
 
+  const tiltInput = document.querySelector('input[name="cameraTiltRange"]');
+  if (tiltInput) {
+    tiltInput.value = Math.round(cTilt);
+  }
+
+  const panInput = document.querySelector('input[name="cameraPanRange"]');
+  if (panInput) {
+    panInput.value = Math.round(cPan);
+  }
 }
-
 
 function changeTopography() {
 
@@ -433,19 +448,3 @@ function render() {
     }
 
 }
-
-
-///--------------user interactions-----------------------///
-
-const canvas = document.querySelector('canvas');
-
-const { width, height, x, y } = canvas.getBoundingClientRect();
-canvas.onmousemove = (ev) => {
-    const { clientX, clientY } = ev
-
-    const precX = clientX / (width + x);
-    const precY = clientY / (height + y);
-
-    updateTypography({ x: precX, y: precY })
-}
-

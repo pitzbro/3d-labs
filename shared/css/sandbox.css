@@ -63,6 +63,11 @@ body {
     height: 100%;
 }
 
+[data-interactions-target],
+canvas {
+    cursor: grab;
+}
+
 /* Typography */
 
 h2 {
