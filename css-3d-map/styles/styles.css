@@ -30,12 +30,15 @@ body {
 }
 
 body.military {
-  background-color: #cbcfbd;
+  /* background-color: #cbcfbd; */
+  background-color: #223c4c;
   /* font-family: 'Courier New', Courier, monospace; */
 }
 
 body.military #territories {
-  fill: #444;
+  fill: #ec8a2d;
+  mix-blend-mode: saturation;
+  opacity: 1;
 }
 
 body.military .gaza-teritory {
@@ -196,6 +199,7 @@ p {
 .asset>span {
   font-size: 20px;
   font-weight: 600;
+  color: #ec8a2d;
 }
 
 .asset video {
