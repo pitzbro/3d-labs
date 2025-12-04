@@ -1,46 +1,98 @@
-const inputs = document.querySelectorAll(".controls input");
-const labels = Array.from(document.querySelectorAll(".controls label"));
-const circles2 = Array.from(document.querySelectorAll("[data-circle]"));
-const assets2 = document.querySelectorAll("[data-asset]");
-const militaryBtn = document.querySelector(".btn-military");
+// controls.js
+(function () {
+  var root = document.documentElement;
+  var cubeWrap = document.querySelector(".cube-wrap") || root;
+  var controlsRoot = document.querySelector(".controls");
+  if (!controlsRoot) return;
 
-const cube = document.querySelector(".cube");
+  var inputs = controlsRoot.querySelectorAll('input.gui-input[type="range"]');
+  var militaryBtn = controlsRoot.querySelector(".btn-military");
 
-militaryBtn.onclick = () => {
-  document.body.classList.toggle("military");
-};
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
 
-inputs.forEach((input) => {
-  input.oninput = () => {
-    const v = input.getAttribute("name");
-    const units = v.startsWith("r")
-      ? "deg"
-      : v === "tZ"
-      ? "px"
-      : v.startsWith("t")
-      ? "%"
-      : "";
-    const label = labels.find((l) => l.getAttribute("for") === v);
-    const valueInput = label.querySelector("span");
+  function formatValue(name, value) {
+    switch (name) {
+      case "rZ":
+      case "rX":
+      case "rY":
+        return value + "deg";
+      case "tY":
+      case "tX":
+        return value + "%";
+      case "tZ":
+        return value + "px";
+      case "sC":
+        return value; // scale is unitless
+      default:
+        return value;
+    }
+  }
 
-    const inputString = input.value + units;
+  function cssVarName(name) {
+    // Map slider name -> CSS custom property
+    // e.g. rZ -> --rZ, tX -> --tX, etc.
+    return "--" + name;
+  }
 
-    valueInput.innerText = inputString;
+  function applyControl(input) {
+    if (!input || !input.name) return;
 
-    document.documentElement.style.setProperty(`--${v}`, inputString);
+    var name = input.name;
+    var rawValue = parseFloat(input.value);
 
-    var style = window.getComputedStyle(cube);
-    var matrix = style.transform;
+    if (isNaN(rawValue)) return;
 
-    console.log(matrix);
+    var min = input.min !== "" ? parseFloat(input.min) : rawValue;
+    var max = input.max !== "" ? parseFloat(input.max) : rawValue;
+    var step = input.step !== "" ? Math.abs(parseFloat(input.step)) : null;
 
-    assets2.forEach((asset) => {
-      const circle = circles2.find(
-        (circle) => circle.dataset.circle === asset.dataset.asset
-      );
-      const { left, top, width, height } = circle.getBoundingClientRect();
-      asset.style.left = `${left + width / 2}px`;
-      asset.style.top = `${top + height / 2}px`;
+    var clamped = clamp(rawValue, min, max);
+    if (step && step > 0) {
+      clamped = Math.round(clamped / step) * step;
+    }
+
+    // Write the (possibly adjusted) value back into the input
+    input.value = clamped;
+
+    var formatted = formatValue(name, clamped);
+    var varName = cssVarName(name);
+
+    // Update CSS custom property on the map container
+    cubeWrap.style.setProperty(varName, formatted);
+
+    // Update the visible <span> text inside the label
+    var labelSpan = input.parentElement && input.parentElement.querySelector("span");
+    if (labelSpan) {
+      labelSpan.textContent = formatted;
+    }
+  }
+
+  // Wire up all sliders
+  inputs.forEach(function (input) {
+    input.addEventListener("input", function () {
+      applyControl(input);
     });
+
+    // Seed CSS vars and labels from initial values
+    applyControl(input);
+  });
+
+  // Military mode toggle
+  if (militaryBtn) {
+    militaryBtn.addEventListener("click", function () {
+      document.body.classList.toggle("military");
+    });
+  }
+
+  // --- Public helper so other scripts (drag, etc.) can sync sliders ---
+
+  window.setControlValue = function (name, value) {
+    var input = controlsRoot.querySelector('input.gui-input[name="' + name + '"]');
+    if (!input) return;
+
+    input.value = value;
+    applyControl(input);
   };
-});
+})();

@@ -27,56 +27,57 @@
             <section>
                 <h2>rotateZ</h2>
                 <label for="rZ">
-                    <span>0deg</span>
-                    <input class="gui-input" type="range" name="rZ" min="-180" max="180" />
+                    <span>5deg</span>
+                    <input class="gui-input" value="5" type="range" name="rZ" min="-180" max="180" />
                 </label>
             </section>
 
             <section>
                 <h2>rotateX</h2>
                 <label for="rX">
-                    <span>0deg</span>
-                    <input class="gui-input" type="range" name="rX" min="-180" max="180" />
+                    <span>35deg</span>
+                    <input class="gui-input" value="35" type="range" name="rX" min="0" max="70" />
                 </label>
             </section>
 
             <section>
                 <h2>rotateY</h2>
                 <label for="rY">
-                    <span>0deg</span>
-                    <input class="gui-input" type="range" name="rY" min="-180" max="180" />
+                    <span>1deg</span>
+                    <input class="gui-input" value="1" type="range" name="rY" min="-30" max="30" />
                 </label>
             </section>
 
             <section>
                 <h2>translateY</h2>
                 <label for="tY">
-                    <span>0%</span>
-                    <input class="gui-input" type="range" name="tY" min="-100" max="100" />
+                    <span>-7%</span>
+                    <input value="-7" class="gui-input" type="range" name="tY" min="-20" max="20" />
                 </label>
             </section>
 
             <section>
                 <h2>translateX</h2>
                 <label for="tX">
-                    <span>0%</span>
-                    <input class="gui-input" type="range" name="tX" min="-100" max="100" />
+                    <span>10%</span>
+                    <input value="10" class="gui-input" type="range" name="tX" min="-30" max="30" />
                 </label>
             </section>
 
             <section>
                 <h2>translateZ</h2>
                 <label for="tZ">
-                    <span>0px</span>
-                    <input class="gui-input" type="range" name="tZ" value="0" min="-1000" max="4000" />
+                    <span>-61px</span>
+                    <input value="-61" class="gui-input" type="range" name="tZ" value="0" min="-500" max="400" />
                 </label>
             </section>
 
             <section>
                 <h2>scale</h2>
                 <label for="sC">
-                    <span>0.7</span>
-                    <input class="gui-input" type="range" name="sC" value="1" min="0.5" max="7" step="0.1" />
+                    <span>0.8</span>
+                    <input scale="0.8" class="gui-input" type="range" name="sC" value="1" min="0.5" max="3"
+                        step="0.1" />
                 </label>
             </section>
 
@@ -269,20 +270,11 @@
                 <p>Your user agent does not support the HTML5 Video element.</p>
             </video>
             <span>
-                Demo text for point 1 at 06:12
+                Video point for 06:12
             </span>
         </div>
 
         <span>Demo point 1</span>
-    </div>
-
-    <div class="asset" data-asset="nir" data-start="0.9" data-end="1">
-        <div>
-            <span>
-                Demo text for point 3 at 06:21
-            </span>
-        </div>
-        <span>Demo point 3</span>
     </div>
 
     <div class="asset" data-asset="gaza" data-start="0.5" data-end="1">
@@ -290,13 +282,23 @@
             <img src="images/image_005.jpg" alt="" srcset="">
 
             <span>
-                Demo text for point 2 at 06:17
+                Image point for 06:17
             </span>
         </div>
 
         <span>Demo point 2</span>
 
     </div>
+
+    <div class="asset" data-asset="nir" data-start="0.9" data-end="1">
+        <div>
+            <span>
+                Text point for 06:21
+            </span>
+        </div>
+        <span>Demo point 3</span>
+    </div>
+
 
     <section class="territory-observer">
         <h2>06:12</h2>
@@ -305,12 +307,13 @@
         </p>
     </section>
 
-    <!-- Shared pointer interactions -->
-    <script src="../shared/js/interactions.js"></script>
-
     <!-- Project-specific behaviour -->
     <script src="js/controls.js"></script>
     <script src="js/script.js"></script>
+
+    <!-- Shared pointer interactions -->
+    <script src="../shared/js/interactions.js"></script>
+
 </body>
 
 </html>

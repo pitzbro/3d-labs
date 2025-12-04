@@ -14,25 +14,13 @@
   --sC: 0.8;
 }
 
-@font-face {
-  font-family: "Open Sans Hebrew";
-  src: url("fonts/OpenSansHebrewRegular.woff");
-}
-
 body {
   min-height: 500vh;
   background-color: #b8b8b8;
-  font-family: "Open Sans Hebrew", "Helvetica Neue", tahoma, Helvetica, Arial,
-    sans-serif;
-  color: #2d2d2d;
-
-  transition: background-color 2s;
 }
 
 body.military {
-  /* background-color: #cbcfbd; */
   background-color: #223c4c;
-  /* font-family: 'Courier New', Courier, monospace; */
 }
 
 body.military #territories {
@@ -91,6 +79,7 @@ p {
   font-family: monospace;
   font-size: 28px;
   background-color: #fff;
+  color: #223c4c;
   margin: 20px;
   padding: 6px 14px;
   font-weight: bold;
@@ -160,6 +149,10 @@ p {
   text-align: center;
   font-size: 14px;
   opacity: 0;
+
+  color: #223c4c;
+
+  font-family: monospace;
 
   transition: opacity .8s;
 }

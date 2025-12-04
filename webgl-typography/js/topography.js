@@ -75,6 +75,8 @@ function updateTypography(cords) {
   if (panInput) {
     panInput.value = Math.round(cPan);
   }
+
+  generateCode()
 }
 
 function changeTopography() {
@@ -142,9 +144,9 @@ fogIntensity: ${fogIntensity},
 fogColor: ${fogColor},
 
 //camera
-cameraHeight: ${cameraHeight},
-cameraTilt: ${cameraTilt},
-cameraPan: ${cameraPan},
+cameraHeight: ${Math.round(cameraHeight)},
+cameraTilt: ${Math.round(cameraTilt)},
+cameraPan: ${Math.round(cameraPan)},
 
 //lights
 
