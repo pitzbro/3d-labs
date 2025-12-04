@@ -116,6 +116,7 @@ input[type="range"] {
 
 .toggle-sidebar-btn {
     position: absolute;
+    background: var(--color-bg-overlay);
     top: 50px;
     right: calc(-1 * var(--toggle-width));
     width: var(--toggle-width);
@@ -125,9 +126,8 @@ input[type="range"] {
     border-radius: 0 50% 50% 0;
     border: 1px solid var(--color-border);
     border-inline-start-color: var(--color-bg);
-    background-color: var(--color-bg);
     color: var(--color-heading);
-
+    border-inline-start: none;
     cursor: pointer;
 }
 
