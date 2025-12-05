@@ -16,10 +16,8 @@
 
 html,
 body {
-  overscroll-behavior: none;
-  /* avoid bounce on some browsers */
+  overflow: hidden;
   scrollbar-width: none;
-  -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
     display: none;
@@ -28,7 +26,6 @@ body {
 
 body {
   min-height: 500vh;
-  overflow: hidden;
   background-color: #b8b8b8;
 }
 
