@@ -38,7 +38,7 @@ function moveAssets() {
     );
     const { left, top, width, height } = circle.getBoundingClientRect();
     asset.style.left = `${left + width / 2}px`;
-    asset.style.top = `${top + height / 2 -10}px`;
+    asset.style.top = `${top + height / 2 - 10}px`;
 
     const start = asset.dataset.start;
     const end = asset.dataset.end;
@@ -252,6 +252,20 @@ window.updateTypography = function (coords) {
     input.value = value;
     applyControl(input);
   };
+
+  // Reset map to default settings (sliders, CSS vars, code preview)
+  window.resetMapDefaults = function () {
+    // numeric values; applyControl will add units via formatValue()
+    window.setControlValue("rZ", 5);    // 5deg
+    window.setControlValue("rX", 35);   // 35deg
+    window.setControlValue("rY", 1);    // 1deg
+    window.setControlValue("tY", -7);   // -7%
+    window.setControlValue("tX", 10);   // 10%
+    window.setControlValue("tZ", -61);  // -61px
+    window.setControlValue("sC", 0.8);  // 0.8 (unitless)
+    // applyControl already calls moveAssets(), which calls updateCodePreview()
+  };
+
   window.onresize = () => moveAssets();
 })();
 
@@ -259,12 +273,100 @@ window.updateTypography = function (coords) {
 function updateCodePreview() {
   const codeEl = document.querySelector(".map-code");
   const cube = document.querySelector(".cube");
-  
-  console.log('updating code!!!!!!!')
+
   if (!cube || !codeEl) return;
 
   const style = getComputedStyle(cube);
   const transform = style.transform || "none";
 
   codeEl.textContent = `${transform};`;
+}
+
+// scroll behavior
+const scrollPlayBtn = document.querySelector(".scroll-animatioin-play-btn");
+
+if (scrollPlayBtn) {
+  let speed = 14;
+  let rafId = null;
+  let isAutoScrolling = false;
+  let isPaused = false;
+
+  function getScrollInfo() {
+    const doc = document.documentElement;
+    const body = document.body;
+
+    const scrollTop = window.pageYOffset || doc.scrollTop || body.scrollTop || 0;
+    const scrollHeight = Math.max(
+      body.scrollHeight,
+      doc.scrollHeight,
+      body.offsetHeight,
+      doc.offsetHeight
+    );
+    const viewportHeight = window.innerHeight || doc.clientHeight;
+
+    return { scrollTop, scrollHeight, viewportHeight };
+  }
+
+  function autoScrollStep() {
+    if (isPaused) return;
+
+    const { scrollTop, scrollHeight, viewportHeight } = getScrollInfo();
+    const maxScrollTop = scrollHeight - viewportHeight;
+
+    if (scrollTop >= maxScrollTop) {
+      // Animation finished
+      isAutoScrolling = false;
+      rafId = null;
+      scrollPlayBtn.textContent = "Play scroll animation";
+      scrollPlayBtn.dataset.scrollAnimation = 'paused'
+
+      // Jump instantly to top
+      window.scrollTo(0, 0);
+
+      // Reset map to default pose if helper exists
+      if (typeof window.resetMapDefaults === "function") {
+        window.resetMapDefaults();
+      }
+
+      return;
+    }
+
+    window.scrollBy(0, speed);
+    rafId = requestAnimationFrame(autoScrollStep);
+  }
+
+
+  function startAutoScroll() {
+    isAutoScrolling = true;
+    isPaused = false;
+    scrollPlayBtn.textContent = "Pause scroll animation";
+    scrollPlayBtn.dataset.scrollAnimation = 'playing'
+    autoScrollStep();
+  }
+
+  function pauseAutoScroll() {
+    isPaused = true;
+    scrollPlayBtn.textContent = "Play scroll animation";
+    scrollPlayBtn.dataset.scrollAnimation = 'paused'
+  }
+
+  function resumeAutoScroll() {
+    isPaused = false;
+    scrollPlayBtn.textContent = "Pause scroll animation";
+    scrollPlayBtn.dataset.scrollAnimation = 'playing'
+    autoScrollStep();
+  }
+
+  scrollPlayBtn.addEventListener("click", () => {
+    if (!isAutoScrolling) {
+      // First time pressing Play
+      startAutoScroll();
+    } else if (isPaused) {
+      // Resume
+      resumeAutoScroll();
+    } else {
+      // Pause
+      pauseAutoScroll();
+    }
+  });
 }

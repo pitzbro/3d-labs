@@ -14,6 +14,18 @@
   --sC: 0.8;
 }
 
+html,
+body {
+  overscroll-behavior: none;
+  /* avoid bounce on some browsers */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 body {
   min-height: 500vh;
   background-color: #b8b8b8;
@@ -75,18 +87,45 @@ p {
   margin: 0 0 1em;
 }
 
-.clock {
+.scroll-dashboard {
+  display: grid;
+  gap: 0.5rem;
   z-index: 11;
   top: 0;
   right: 0;
   position: fixed;
   font-family: monospace;
   font-size: 28px;
-  background-color: #fff;
-  color: #223c4c;
   margin: 20px;
-  padding: 6px 14px;
   font-weight: bold;
+  text-align: center;
+
+  .scroll-animatioin-play-btn {
+    border: none;
+    color: #fff;
+    padding: 0.8em;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    &[data-scroll-animation="paused"] {
+      background-color: #ec8a2d;
+    }
+
+    &[data-scroll-animation="playing"] {
+      background-color: #708195;
+    }
+
+    &:disabled {
+      background-color: red;
+    }
+  }
+}
+
+.clock {
+  background-color: #fff;
+  padding: 6px 14px;
+  color: #223c4c;
   border: 1px solid #000;
   /* opacity: 0; */
 }
@@ -149,9 +188,9 @@ p {
 .asset {
   position: fixed;
   transform: translate(-50%, calc(-100% - 14px));
-  width: clamp(150px, 50vw, 240px);
+  width: clamp(150px, 15.6vw, 200px);
   text-align: center;
-  font-size: 14px;
+  font-size: clamp(8.6px, 0.9vw, 11px);
   opacity: 0;
 
   user-select: none;
@@ -201,8 +240,8 @@ p {
 }
 
 .asset>span {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: clamp(12px, 1.3vw, 16px);
+  /* font-weight: 600; */
   color: #ec8a2d;
 }
 

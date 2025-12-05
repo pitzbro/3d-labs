@@ -14,7 +14,11 @@
 </head>
 
 <body class="military">
-    <div id="clock" class="clock">06:12</div>
+
+    <div class="scroll-dashboard">
+        <div id="clock" class="clock">06:12</div>
+        <button class="scroll-animatioin-play-btn" data-scroll-animation="paused">Play scroll animation</button>
+    </div>
 
     <!-- Standardised sidebar: keep .controls so existing JS still works -->
     <aside id="controls" class="controls sidebar gui open">
@@ -276,12 +280,12 @@
         <span>Demo point 1</span>
     </div>
 
-    <div class="asset" data-asset="gaza" data-start="0.5" data-end="1">
+    <div class="asset" data-asset="gaza" data-start="0.3" data-end="0.8">
         <div>
             <img src="images/placeholder2.gif" alt="" srcset="">
 
             <span>
-                Asset point for 06:17
+                Asset point for 06:15
             </span>
         </div>
 
@@ -289,10 +293,10 @@
 
     </div>
 
-    <div class="asset" data-asset="nir" data-start="0.9" data-end="1">
+    <div class="asset" data-asset="nir" data-start="0.5" data-end="0.9">
         <div>
             <span>
-                Text point for 06:21
+                Text point for 06:18
             </span>
         </div>
         <span>Demo point 3</span>
@@ -307,7 +311,9 @@
     </section>
 
     <!-- Project-specific behaviour -->
-    <script src="js/script.js"></script>
+
+    <script src="js/scroll-lock.js"></script>
+    <script src="js/css-3d-map-script.js"></script>
 
     <!-- Shared pointer interactions -->
     <script src="../shared/js/interactions.js"></script>
