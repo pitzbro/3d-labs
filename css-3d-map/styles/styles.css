@@ -28,6 +28,7 @@ body {
 
 body {
   min-height: 500vh;
+  overflow: hidden;
   background-color: #b8b8b8;
 }
 
