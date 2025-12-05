@@ -111,10 +111,12 @@ p {
 
     &[data-scroll-animation="paused"] {
       background-color: #ec8a2d;
+      border: 1px solid #ec8a2d;
     }
 
     &[data-scroll-animation="playing"] {
       background-color: #708195;
+      border: 1px solid #fff;
     }
 
     &:disabled {
