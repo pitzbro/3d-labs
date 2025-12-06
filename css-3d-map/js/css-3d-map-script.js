@@ -259,7 +259,7 @@ window.updateTypography = function (coords) {
     window.setControlValue("rZ", 5);    // 5deg
     window.setControlValue("rX", 35);   // 35deg
     window.setControlValue("rY", 1);    // 1deg
-    window.setControlValue("tY", -7);   // -7%
+    window.setControlValue("tY", -6);   // -6%
     window.setControlValue("tX", 10);   // 10%
     window.setControlValue("tZ", -61);  // -61px
     window.setControlValue("sC", 0.8);  // 0.8 (unitless)
