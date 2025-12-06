@@ -101,8 +101,6 @@
             <div class="side front" data-side="front" viewBox="0 0 100 100">
                 <img class="base-image military-img" src="images/map_military1.gif" alt="" />
 
-                <!-- SVG map (unchanged) -->
-                <!-- ... keep your existing <svg> here exactly as it is ... -->
                 <svg viewBox="0 0 700 700" id="main-svg">
 
                     <defs>
@@ -158,6 +156,10 @@
                         </g>
                     </g>
 
+                </svg>
+
+                <svg viewBox="0 0 700 700" id="overlay-svg">
+
                     <g id="borders" fill="none" stroke-miterlimit="3.864">
 
                         <use href="#border" fill="#23333e" style="mix-blend-mode: color-dodge;" stroke="#787878"
@@ -169,51 +171,19 @@
 
                     <g id="dots">
 
-
-                        <circle cx="238.151" cy="546.03" r="2.2" />
-                        <circle cx="264.169" cy="582.043" r="2.2" />
-                        <circle cx="270.083" cy="535.054" r="2.2" />
-                        <circle cx="283.421" cy="530.288" r="2.2" />
-                        <circle cx="297.358" cy="527.466" r="2.2" />
-                        <circle cx="337.196" cy="521.07" r="2.2" />
-                        <circle cx="334.448" cy="514.505" r="2.2" />
-                        <circle cx="354.948" cy="492.75" r="2.2" />
-                        <circle cx="361.815" cy="528.658" r="2.2" />
-                        <circle cx="320.477" cy="442.441" r="2.2" />
-                        <circle cx="319.332" cy="426.967" r="2.2" />
-                        <circle cx="490.743" cy="304.296" r="2.2" />
-                        <circle cx="465.893" cy="284.374" r="2.2" />
-                        <circle cx="461.097" cy="231.365" r="2.2" />
-                        <circle cx="414.769" cy="176.563" r="2.2" />
-                        <circle cx="415.043" cy="325.34" r="2.2" />
-                        <circle cx="382.871" cy="392.069" r="2.2" />
-                        <circle cx="473.344" cy="170.666" r="2.2" />
-                        <circle cx="479.781" cy="312.823" r="2.2" />
-                        <circle cx="415.909" cy="339.577" r="2.2" />
-                        <circle cx="499.258" cy="382.251" r="2.2" />
-                        <circle cx="439.897" cy="215.877" r="2.2" />
-                        <circle cx="484.356" cy="252.952" r="2.2" />
-                        <circle cx="402.506" cy="308.749" r="2.2" />
-                        <circle cx="401.56" cy="356.868" r="2.2" />
-                        <circle cx="385.071" cy="371.466" r="2.2" />
-                        <circle cx="504.064" cy="455.566" r="2.2" />
-                        <circle cx="378.485" cy="280.47" r="0" />
-                        <circle cx="345.179" cy="532.232" r="0" />
-                        <circle cx="330.78" cy="457.993" r="2.2" />
-
                         <g class="circle-group">
-                            <circle cx="467.004" cy="263.026" r="0" data-circle="nir" />
+                            <circle cx="467.004" cy="263.026" r="2" data-circle="nir" />
                             <use href="#animated-dot" x="467.004" y="263.026" />
                         </g>
 
 
                         <g class="circle-group">
-                            <circle cx="436.133" cy="298.978" r="0" data-circle="gaza" />
+                            <circle cx="436.133" cy="298.978" r="2" data-circle="gaza" />
                             <use href="#animated-dot" x="436.133" y="298.978" />
                         </g>
 
                         <g class="circle-group">
-                            <circle cx="326.201" cy="403.973" r="0" data-circle="kisufim" />
+                            <circle cx="326.201" cy="403.973" r="2" data-circle="kisufim" />
                             <use href="#animated-dot" x="326.201" y="403.973" />
                         </g>
                     </g>

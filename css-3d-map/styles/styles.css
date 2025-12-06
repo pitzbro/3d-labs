@@ -35,7 +35,6 @@ body.military {
 
 body.military #territories {
   fill: #ec8a2d;
-  mix-blend-mode: saturation;
   opacity: 1;
 }
 
@@ -127,7 +126,6 @@ p {
   padding: 6px 14px;
   color: #223c4c;
   border: 1px solid #000;
-  /* opacity: 0; */
 }
 
 .cube-wrap {
@@ -162,12 +160,21 @@ p {
   position: absolute;
   bottom: 0;
   left: 0;
-  /* transform: translateX(-50%); */
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* transform: rotate(-10.7deg) scale(0.63) translate(-81.9%, -4.7%); */
-  /* opacity: 0.25; */
+}
+
+#main-svg {
+  mix-blend-mode: saturation;
+}
+
+#overlay-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .side svg {
