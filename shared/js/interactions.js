@@ -74,6 +74,14 @@
     };
   }
 
+  // --- NEW: allow projects to reset the drag center explicitly ---
+  window.resetInteractionsCenter = function (x, y) {
+    center = {
+      x: clamp(typeof x === "number" ? x : 0.5, 0, 1),
+      y: clamp(typeof y === "number" ? y : 0.5, 0, 1),
+    };
+  };
+
   var isDragging = false;
   var dragOrigin = null;        // where this drag started (normalized)
   var lastMapped = null;        // last mapped coords of current drag

@@ -263,7 +263,11 @@ window.updateTypography = function (coords) {
     window.setControlValue("tX", 10);   // 10%
     window.setControlValue("tZ", -61);  // -61px
     window.setControlValue("sC", 0.8);  // 0.8 (unitless)
-    // applyControl already calls moveAssets(), which calls updateCodePreview()
+
+    // NEW: also reset the drag center so the next drag starts from defaults
+    if (typeof window.resetInteractionsCenter === "function") {
+      window.resetInteractionsCenter(0.5, 0.5); // center of the interaction area
+    }
   };
 
   window.onresize = () => moveAssets();
