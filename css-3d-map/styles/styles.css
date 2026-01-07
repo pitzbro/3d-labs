@@ -77,7 +77,11 @@ body>section {
 }
 
 .sidebar {
-  --sidebar-width: 270px;
+  --sidebar-width: 200px;
+
+  @media (min-width: 860px) {
+    --sidebar-width: 270px;
+  }
 }
 
 p {

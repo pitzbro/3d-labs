@@ -115,17 +115,17 @@ window.updateTypography = function (coords) {
 
   var xNorm = coords && typeof coords.x === "number" ? coords.x : 0.5;
   var yNorm = coords && typeof coords.y === "number" ? coords.y : 0.5;
-
+  
   // Map drag X -> rotateZ, drag Y -> rotateX
   var rZMeta = getRangeMeta("rZ");
   var rXMeta = getRangeMeta("rX");
-
+  
   if (!rZMeta || !rXMeta) return;
 
   var rZValue = mapNormToRange(xNorm, rZMeta.min, rZMeta.max);
   var rXValue = mapNormToRange(yNorm, rXMeta.min, rXMeta.max);
-
-  rZValue = quantize(rZValue, rZMeta.step);
+  
+  rZValue = quantize(rZValue, rZMeta.step) * -1;
   rXValue = quantize(rXValue, rXMeta.step);
 
   // Use the helper from controls.js so CSS vars + labels stay in sync
