@@ -40,6 +40,22 @@
 
   if (!target) return;
 
+  // --- iOS/touch fix: ignore gestures that start on the sidebar/UI ---
+  var ignoreEl =
+    document.querySelector("#sidebar-gui") ||
+    document.querySelector(".sidebar") ||
+    document.querySelector("[data-interactions-ignore]");
+
+  function pointInRect(x, y, rect) {
+    return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+  }
+
+  function shouldIgnoreEvent(ev) {
+    if (!ignoreEl) return false;
+    var r = ignoreEl.getBoundingClientRect();
+    return pointInRect(ev.clientX, ev.clientY, r);
+  }
+
   function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
   }
@@ -114,8 +130,10 @@
   target.style.cursor = "grab";
 
   target.addEventListener("pointerdown", function (ev) {
+    if (shouldIgnoreEvent(ev)) return;
+
     isDragging = true;
-    dragOrigin = getNormalizedCoords(ev); // don't call callback on click
+    dragOrigin = getNormalizedCoords(ev);
     target.style.cursor = "grabbing";
 
     if (target.setPointerCapture) {
@@ -126,6 +144,7 @@
       }
     }
   });
+
 
   target.addEventListener("pointermove", function (ev) {
     if (!isDragging) return;
