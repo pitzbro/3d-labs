@@ -130,6 +130,8 @@
   target.style.cursor = "grab";
 
   target.addEventListener("pointerdown", function (ev) {
+
+    console.log('shouldIgnoreEvent', shouldIgnoreEvent(ev))
     if (shouldIgnoreEvent(ev)) return;
 
     isDragging = true;

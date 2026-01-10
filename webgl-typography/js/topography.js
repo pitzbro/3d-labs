@@ -44,39 +44,39 @@ function resetTypography() {
 }
 
 function updateTypography(cords) {
-  const { x, y } = cords;
+    const { x, y } = cords;
 
-  // Same mapping as before
-  const cHeight = 3000 * (1 - y);
-  const cTilt = 3000 * x;
-  const cPan = -3000 * (1 - x);
+    // Same mapping as before
+    const cHeight = 3000 * (1 - y);
+    const cTilt = 3000 * x;
+    const cPan = -3000 * (1 - x);
 
-  // Keep globals in sync (so sliders / other code can rely on them)
-  cameraHeight = cHeight;
-  cameraTilt = cTilt;
-  cameraPan = cPan;
+    // Keep globals in sync (so sliders / other code can rely on them)
+    cameraHeight = cHeight;
+    cameraTilt = cTilt;
+    cameraPan = cPan;
 
-  // Apply to camera
-  camera.position.set(cPan, cHeight, cTilt);
+    // Apply to camera
+    camera.position.set(cPan, cHeight, cTilt);
 
-  // ---- Sync sidebar sliders with current camera values ---- //
+    // ---- Sync sidebar sliders with current camera values ---- //
 
-  const heightInput = document.querySelector('input[name="cameraHeightRange"]');
-  if (heightInput) {
-    heightInput.value = Math.round(cHeight);
-  }
+    const heightInput = document.querySelector('input[name="cameraHeightRange"]');
+    if (heightInput) {
+        heightInput.value = Math.round(cHeight);
+    }
 
-  const tiltInput = document.querySelector('input[name="cameraTiltRange"]');
-  if (tiltInput) {
-    tiltInput.value = Math.round(cTilt);
-  }
+    const tiltInput = document.querySelector('input[name="cameraTiltRange"]');
+    if (tiltInput) {
+        tiltInput.value = Math.round(cTilt);
+    }
 
-  const panInput = document.querySelector('input[name="cameraPanRange"]');
-  if (panInput) {
-    panInput.value = Math.round(cPan);
-  }
+    const panInput = document.querySelector('input[name="cameraPanRange"]');
+    if (panInput) {
+        panInput.value = Math.round(cPan);
+    }
 
-  generateCode()
+    generateCode()
 }
 
 function changeTopography() {
@@ -216,15 +216,6 @@ function init() {
 
     camera = new THREE.PerspectiveCamera(40, SCREEN_WIDTH / SCREEN_HEIGHT, 2, 4000);
     camera.position.set(cameraPan, cameraHeight, cameraTilt);
-
-    controls = new THREE.OrbitControls(camera);
-    controls.target.set(0, 0, 0);
-
-    controls.rotateSpeed = 1.0;
-    controls.zoomSpeed = 1.2;
-    controls.panSpeed = 0.8;
-
-    controls.keys = [65, 83, 68];
 
     // SCENE (FINAL)
 
@@ -371,6 +362,17 @@ function init() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     container.appendChild(renderer.domElement);
+
+    // ORBIT CONTROLS — bind to canvas ONLY
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    controls.target.set(0, 0, 0);
+
+    controls.rotateSpeed = 1.0;
+    controls.zoomSpeed = 1.2;
+    controls.panSpeed = 0.8;
+
+    controls.keys = [65, 83, 68];
 
     // changeTopography()
     resetTypography()
