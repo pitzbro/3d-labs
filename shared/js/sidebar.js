@@ -1,9 +1,10 @@
 const sidebar = document.querySelector('.sidebar');
 
+sidebar.onclick = (ev) => ev.stopPropagation();
+
 function myFunction(x) {
   if (x.matches) { // If media query matches
     sidebar.classList.remove('open');
-    console.log('matches!!!')
   }
 }
 
