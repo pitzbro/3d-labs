@@ -136,13 +136,13 @@ input[type="range"] {
 }
 
 .toggle-sidebar-btn::before {
-    content: url('/shared/images/arrow-right.svg');
+    content: url('../images/arrow-right.svg');
 }
 
 /* When sidebar is open, show "X" (keeps original behaviour) */
 
 .sidebar.open .toggle-sidebar-btn::before {
-    content: url('/shared/images/close.svg');
+    content: url('../images/close.svg');
 }
 
 /* Remove focus outline on click but keep accessibility for keyboard if needed */
