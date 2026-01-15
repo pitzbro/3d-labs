@@ -125,7 +125,7 @@ input[type="range"] {
     right: calc(-1 * var(--toggle-width));
     width: var(--toggle-width);
     height: var(--toggle-height);
-    padding-inline-end: 12px;
+    padding-inline: 8px 12px;
 
     border-radius: 0 50% 50% 0;
     border: 1px solid var(--color-border);
@@ -136,13 +136,13 @@ input[type="range"] {
 }
 
 .toggle-sidebar-btn::before {
-    content: '>';
+    content: url('/shared/images/arrow-right.svg');
 }
 
 /* When sidebar is open, show "X" (keeps original behaviour) */
 
 .sidebar.open .toggle-sidebar-btn::before {
-    content: 'X';
+    content: url('/shared/images/close.svg');
 }
 
 /* Remove focus outline on click but keep accessibility for keyboard if needed */
